@@ -20,7 +20,7 @@ class ListViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         horoscopeList = HoroscopeProvider.getAllHoroscopes()
         tableView.dataSource = self
-        fetchHoroscopeData()
+    
        
     }
     
@@ -36,6 +36,20 @@ class ListViewController: UIViewController, UITableViewDataSource {
         cell.logoImageView.image = horoscope.logo
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showDetail", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let selectedHoroscope = horoscopeList[indexPath.row]
+                let detailVC = segue.destination as! DetailViewController
+                detailVC.horoscope = selectedHoroscope
+            }
+        }
     }
     
     //Llamada a la API
@@ -71,7 +85,35 @@ class ListViewController: UIViewController, UITableViewDataSource {
                 }
             }
         }
-         
     
+    /**
+     // Llamada a la API con parámetro de signo
+     func fetchHoroscopeData(for sign: String) {
+         HoroscopeApiService.shared.getDailyHoroscope(sign: sign) { result in
+             switch result {
+             case .success(let horoscopeResponse):
+                 let horoscopeData = horoscopeResponse.data.horoscopeData
+                 self.horoscopeDataList[sign] = horoscopeData
+                 self.printHoroscopeData(for: sign)
+             case .failure(let error):
+                 print("\(sign): \(error)")
+                 self.horoscopeDataList[sign] = "Error fetching data"
+                 self.printHoroscopeData(for: sign)
+             }
+         }
+     }
+
+     // Función para imprimir los datos de un signo específico
+     func printHoroscopeData(for sign: String) {
+         if let horoscopeData = horoscopeDataList[sign] {
+             print("\(sign):\n\(horoscopeData)\n")
+             print("\n")
+         }
+     }
+     
+     fetchHoroscopeData(for: "aries")
+     */
+         
+
 }
 
