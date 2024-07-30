@@ -101,7 +101,7 @@
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HlE-2p-4Bb">
-                                <rect key="frame" x="52" y="567" width="289" height="235"/>
+                                <rect key="frame" x="52" y="567" width="289" height="186"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
@@ -136,9 +136,18 @@
                             <constraint firstItem="MzH-xu-WoT" firstAttribute="trailing" secondItem="qyG-0K-b9F" secondAttribute="trailing" constant="16" id="itW-Th-Es1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Detalle" id="GJL-g0-Ggs"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Detalle" id="GJL-g0-Ggs">
+                        <barButtonItem key="rightBarButtonItem" image="horoscope-icons/heart_un" width="32" style="plain" id="J6d-cX-JBH">
+                            <connections>
+                                <action selector="setFavorite:" destination="OuX-vD-c5O" id="k8h-h4-IHQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="datesLabel" destination="4wu-BN-LwL" id="nAq-ir-qIt"/>
+                        <outlet property="favoriteButtonItem" destination="J6d-cX-JBH" id="mm0-5o-1IN"/>
                         <outlet property="logoImageView" destination="nc3-mV-mEu" id="aAJ-qd-p8U"/>
                         <outlet property="luckTextView" destination="HlE-2p-4Bb" id="iaG-8f-8Lg"/>
                         <outlet property="nameLabel" destination="qyG-0K-b9F" id="gAT-Nz-PxV"/>
@@ -168,6 +177,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="horoscope-icons/heart_un" width="64" height="64"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

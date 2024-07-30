@@ -11,19 +11,18 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var luckTextView: UITextView!
     
+    @IBOutlet weak var favoriteButtonItem: UIBarButtonItem!
+    
+
+    
     var horoscope: Horoscope?
-    var selectedSign: String?
+    var isFavorite: Bool = false
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let horoscope = horoscope {
-            nameLabel.text = horoscope.name
-            datesLabel.text = horoscope.dates
-            logoImageView.image = horoscope.logo
-            fetchHoroscopeData(for: horoscope.id)
-        }
-
+        loadData()
+    
     }
     
     func fetchHoroscopeData(for sign: String) {
@@ -43,5 +42,38 @@ class DetailViewController: UIViewController {
             }
         }
     
-
+    func loadData(){
+        if let horoscope = horoscope {
+            let favoriteHoroscope = UserDefaults.standard.string(forKey: "FAVORITE_HOROSCOPE") ?? ""
+            isFavorite = horoscope.id == favoriteHoroscope
+            setFavoriteButtomItem()
+            nameLabel.text = horoscope.name
+            datesLabel.text = horoscope.dates
+            logoImageView.image = horoscope.logo
+            fetchHoroscopeData(for: horoscope.id)
+        }
+    }
+    
+    @IBAction @objc func setFavorite(_ sender: UIBarButtonItem) {
+        isFavorite = !isFavorite
+        if isFavorite {
+            UserDefaults.standard.setValue(horoscope?.id, forKey: "FAVORITE_HOROSCOPE")
+        } else {
+            UserDefaults.standard.setValue("", forKey: "FAVORITE_HOROSCOPE")
+        }
+        setFavoriteButtomItem()
+    }
+    
+    func setFavoriteButtomItem() {
+        if (isFavorite) {
+            favoriteButtonItem.image = UIImage(named:"horoscope-icons/heart")?.withRenderingMode(.alwaysOriginal)
+            favoriteButtonItem.style = .plain
+        } else {
+            favoriteButtonItem.image = UIImage(named: "horoscope-icons/heart_un")?.withRenderingMode(.alwaysOriginal)
+            favoriteButtonItem.style = .plain
+        }
+    }
+    
+    
+    
 }

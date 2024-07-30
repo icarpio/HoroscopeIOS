@@ -14,13 +14,12 @@ class ListViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     
     var horoscopeList: [Horoscope] = []
-    var horoscopeDataList: [String: String] = [:]
+    //var horoscopeDataList: [String: String] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         horoscopeList = HoroscopeProvider.getAllHoroscopes()
         tableView.dataSource = self
-    
        
     }
     
@@ -51,7 +50,7 @@ class ListViewController: UIViewController, UITableViewDataSource {
             }
         }
     }
-    
+    /**
     //Llamada a la API
     func fetchHoroscopeData() {
             let group = DispatchGroup()
@@ -85,34 +84,9 @@ class ListViewController: UIViewController, UITableViewDataSource {
                 }
             }
         }
-    
-    /**
-     // Llamada a la API con parámetro de signo
-     func fetchHoroscopeData(for sign: String) {
-         HoroscopeApiService.shared.getDailyHoroscope(sign: sign) { result in
-             switch result {
-             case .success(let horoscopeResponse):
-                 let horoscopeData = horoscopeResponse.data.horoscopeData
-                 self.horoscopeDataList[sign] = horoscopeData
-                 self.printHoroscopeData(for: sign)
-             case .failure(let error):
-                 print("\(sign): \(error)")
-                 self.horoscopeDataList[sign] = "Error fetching data"
-                 self.printHoroscopeData(for: sign)
-             }
-         }
-     }
-
-     // Función para imprimir los datos de un signo específico
-     func printHoroscopeData(for sign: String) {
-         if let horoscopeData = horoscopeDataList[sign] {
-             print("\(sign):\n\(horoscopeData)\n")
-             print("\n")
-         }
-     }
-     
-     fetchHoroscopeData(for: "aries")
      */
+    
+    
          
 
 }
