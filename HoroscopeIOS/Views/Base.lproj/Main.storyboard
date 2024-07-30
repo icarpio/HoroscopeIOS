@@ -140,14 +140,14 @@
                     <navigationItem key="navigationItem" title="Detalle" id="GJL-g0-Ggs">
                         <barButtonItem key="rightBarButtonItem" image="horoscope-icons/heart_un" width="32" style="plain" id="J6d-cX-JBH">
                             <connections>
-                                <action selector="setFavorite:" destination="OuX-vD-c5O" id="k8h-h4-IHQ"/>
+                                <action selector="setFavorite:" destination="OuX-vD-c5O" id="zBS-eG-ggk"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="datesLabel" destination="4wu-BN-LwL" id="nAq-ir-qIt"/>
-                        <outlet property="favoriteButtonItem" destination="J6d-cX-JBH" id="mm0-5o-1IN"/>
+                        <outlet property="favoriteButtonItem" destination="J6d-cX-JBH" id="dV8-Kc-9OR"/>
                         <outlet property="logoImageView" destination="nc3-mV-mEu" id="aAJ-qd-p8U"/>
                         <outlet property="luckTextView" destination="HlE-2p-4Bb" id="iaG-8f-8Lg"/>
                         <outlet property="nameLabel" destination="qyG-0K-b9F" id="gAT-Nz-PxV"/>

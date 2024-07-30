@@ -13,34 +13,35 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var favoriteButtonItem: UIBarButtonItem!
     
-
+    
     
     var horoscope: Horoscope?
     var isFavorite: Bool = false
+    var horoscopeIndex:Int = 0
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
-    
+        
     }
     
     func fetchHoroscopeData(for sign: String) {
-            HoroscopeApiService.shared.getDailyHoroscope(sign: sign) { result in
-                switch result {
-                case .success(let horoscopeResponse):
-                    let horoscopeData = horoscopeResponse.data.horoscopeData
-                    DispatchQueue.main.async {
-                        self.luckTextView.text = horoscopeData
-                    }
-                case .failure(let error):
-                    print("\(sign): \(error)")
-                    DispatchQueue.main.async {
-                        self.luckTextView.text = "Error fetching data"
-                    }
+        HoroscopeApiService.shared.getDailyHoroscope(sign: sign) { result in
+            switch result {
+            case .success(let horoscopeResponse):
+                let horoscopeData = horoscopeResponse.data.horoscopeData
+                DispatchQueue.main.async {
+                    self.luckTextView.text = horoscopeData
+                }
+            case .failure(let error):
+                print("\(sign): \(error)")
+                DispatchQueue.main.async {
+                    self.luckTextView.text = "Error fetching data"
                 }
             }
         }
+    }
     
     func loadData(){
         if let horoscope = horoscope {
@@ -72,6 +73,24 @@ class DetailViewController: UIViewController {
             favoriteButtonItem.image = UIImage(named: "horoscope-icons/heart_un")?.withRenderingMode(.alwaysOriginal)
             favoriteButtonItem.style = .plain
         }
+    }
+    
+    @IBAction func goToPrev(_ sender: UIButton) {
+        if (horoscopeIndex == 0) {
+            horoscopeIndex = HoroscopeProvider.getAllHoroscopes().count
+        }
+        horoscopeIndex -= 1
+        horoscope = HoroscopeProvider.getAllHoroscopes()[horoscopeIndex]
+        loadData()
+    }
+    
+    @IBAction func goToNext(_ sender: UIButton) {
+        horoscopeIndex += 1
+        if (horoscopeIndex == HoroscopeProvider.getAllHoroscopes().count) {
+            horoscopeIndex = 0
+        }
+        horoscope = HoroscopeProvider.getAllHoroscopes()[horoscopeIndex]
+        loadData()
     }
     
     
